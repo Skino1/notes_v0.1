@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="app.js" defer></script>
+    <script src="assets/script/app.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="shortcut icon"
@@ -26,6 +26,9 @@
         filter: invert(19%) sepia(79%) saturate(2790%) hue-rotate(346deg)
           brightness(102%) contrast(97%);
       }
+      .filter-blue {
+        filter: invert(38%) sepia(79%) saturate(2856%) hue-rotate(177deg) brightness(90%) contrast(98%);
+      }
     </style>
     <title>NoteS</title>
   </head>
@@ -46,7 +49,7 @@
           alt="burger_menu"
         />
         <img
-          class="filter-white xl:ml-28 lg:ml-16 md:ml-10 sm:ml-4"
+          class="filter-white ml-5"
           width="24px"
           height="24px"
           src="assets/svg/documents-outline.svg"
@@ -145,31 +148,7 @@
     <main
       class="grid grid-cols-4 grid-rows-4 auto-rows-min row-start-2 row-end-3 col-start-2 col-end-3 bg-white rounded-l-3xl" id="list_notes"
     >
-      <div
-        id="note_add"
-        class="group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex flex-col"
-      >
-        <input
-          class="font-bold mb-2 p-1 rounded-md"
-          id="note_title"
-          placeholder="Add new note"
-        />
-        <textarea
-          class="resize-none bg-slate-300 rounded-md"
-          type="text"
-          id="note_text"
-          rows="5"
-          placeholder="Type here"
-        ></textarea>
-        <div
-          class="collapse group-hover:visible flex flex-nowrap justify-end pt-1"
-          id="buttons"
-        >
-          <button
-            class="filter-green bg-[url('assets/svg/checkmark-circle.svg')] w-5 h-5" id="add_button"
-          ></button>
-        </div>
-      </div>
+
     </main>
     <footer class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto">
       <div class="copyrights flex justify-end pr-5">Disigned by Skino 2023</div>
