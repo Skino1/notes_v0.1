@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="app.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="shortcut icon"
+      href="assets/svg/documents-outline.svg"
+      type="image/x-icon"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+      body {
+        color: aliceblue;
+      }
+      .filter-white {
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(152deg)
+          brightness(103%) contrast(103%);
+      }
+      .filter-green {
+        filter: invert(56%) sepia(30%) saturate(2681%) hue-rotate(48deg)
+          brightness(91%) contrast(90%);
+      }
+      .filter-red {
+        filter: invert(19%) sepia(79%) saturate(2790%) hue-rotate(346deg)
+          brightness(102%) contrast(97%);
+      }
+    </style>
+    <title>NoteS</title>
+  </head>
+  <body
+    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.10fr_1fr_0.1fr] bg-slate-900 h-screen"
+  >
+    <header
+      class="bg-slate-900 grid grid-cols-[0.25fr_1fr] grid-rows-1 py-4 row-start-1 row-end-2 col-start-1 col-end-3"
+    >
+      <div
+        class="header__profile flex flex-nowrap row-start-1 row-end-2 col-start-1 col-end-2 items-center"
+      >
+        <img
+          class="filter-white ml-5 cursor-pointer"
+          width="24px"
+          height="24px"
+          src="assets/svg/menu-outline.svg"
+          alt="burger_menu"
+        />
+        <img
+          class="filter-white xl:ml-28 lg:ml-16 md:ml-10 sm:ml-4"
+          width="24px"
+          height="24px"
+          src="assets/svg/documents-outline.svg"
+          alt="logo"
+        />
+        <p class="header__company pl-1">NoteS</p>
+      </div>
+      <div
+        class="header__user_menu flex row-start-1 row-end-2 col-start-2 col-end-3 justify-end"
+      >
+        <ul class="header__list flex flex-nowrap ">
+          <li
+            class="header__list_element list-none pr-5 flex flex-nowrap items-center"
+          >
+            <img
+              class="filter-white"
+              height="16px"
+              width="16px"
+              src="assets/svg/contrast-outline.svg"
+              alt="theme_icon"
+            />
+            <p class="pl-1">Theme</p>
+            
+          </li>
+          <li
+            class="header__list_element"
+          >
+          <a class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center" href="">
+            <img
+              class="filter-white"
+              height="16px"
+              width="16px"
+              src="assets/svg/information-outline.svg"
+              alt="about_icon"
+            />
+            <p>About</p>
+            </a>
+          </li>
+          <li
+            class="header__list_element list-none pr-5 flex flex-nowrap items-center"
+          >
+            <img
+              class="filter-white"
+              height="16px"
+              width="16px"
+              src="assets/svg/help-outline.svg"
+              alt="help_icon"
+            />
+            <p>Help</p>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <aside
+      class="side-menu bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col"
+    >
+      <ul class="side-menu__list flex flex-col last:justify-end">
+        <li
+          class="side_menu__list_element md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl bg-slate-700 md:m-4 sm:m-1"
+        >
+          <img
+            class="filter-white "
+            src="assets/svg/document-outline.svg"
+            height="32px"
+            width="32px"
+            alt="notes_icon"
+          />
+          <p class="ml-5">Notes</p>
+        </li>
+        <li
+          class=" side_menu__list_element md:p-5 sm:p-1  flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:m-4 sm:m-1"
+        >
+          <img
+            class="filter-white "
+            src="assets/svg/list-outline.svg"
+            height="32px"
+            width="32px"
+            alt="lists_icon"
+          />
+          <p class="ml-6">Lists</p>
+        </li>
+      </ul>
+      <div
+        class="side__profile flex flex-nowrap items-center rounded-xl bg-slate-700 m-4 p-5"
+      >
+        <img
+          class="filter-white"
+          src="assets/svg/person-circle-outline.svg"
+          width="32px"
+          height="32px"
+          alt="Userpic"
+        />
+        <div class="text-center pl-5">User</div>
+      </div>
+    </aside>
+    <main
+      class="grid grid-cols-4 grid-rows-4 auto-rows-min row-start-2 row-end-3 col-start-2 col-end-3 bg-white rounded-l-3xl" id="list_notes"
+    >
+      <div
+        id="note_add"
+        class="group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex flex-col"
+      >
+        <input
+          class="font-bold mb-2 p-1 rounded-md"
+          id="note_title"
+          placeholder="Add new note"
+        />
+        <textarea
+          class="resize-none bg-slate-300 rounded-md"
+          type="text"
+          id="note_text"
+          rows="5"
+          placeholder="Type here"
+        ></textarea>
+        <div
+          class="collapse group-hover:visible flex flex-nowrap justify-end pt-1"
+          id="buttons"
+        >
+          <button
+            class="filter-green bg-[url('assets/svg/checkmark-circle.svg')] w-5 h-5" id="add_button"
+          ></button>
+        </div>
+      </div>
+    </main>
+    <footer class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto">
+      <div class="copyrights flex justify-end pr-5">Disigned by Skino 2023</div>
+    </footer>
+  </body>
+</html>
