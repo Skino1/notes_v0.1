@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <script src="assets/script/app.js" defer></script>
+    <script src="assets/script/menu.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="shortcut icon"
@@ -33,7 +34,7 @@
     <title>NoteS</title>
   </head>
   <body
-    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.10fr_1fr_0.1fr] bg-slate-900 h-screen"
+    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.10fr_1fr_0.1fr] bg-slate-900 h-screen" id="body_container"
   >
     <header
       class="bg-slate-900 grid grid-cols-[0.25fr_1fr] grid-rows-1 py-4 row-start-1 row-end-2 col-start-1 col-end-3"
@@ -42,6 +43,7 @@
         class="header__profile flex flex-nowrap row-start-1 row-end-2 col-start-1 col-end-2 items-center"
       >
         <img
+          id="menu"
           class="filter-white ml-5 cursor-pointer"
           width="24px"
           height="24px"
@@ -117,7 +119,7 @@
             width="32px"
             alt="notes_icon"
           />
-          <p class="ml-5">Notes</p>
+          <p class="ml-5 menu_element" id="menu_element">Notes</p>
         </li>
         <li
           class=" side_menu__list_element md:p-5 sm:p-1  flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:m-4 sm:m-1"
@@ -129,7 +131,7 @@
             width="32px"
             alt="lists_icon"
           />
-          <p class="ml-6">Lists</p>
+          <p class="ml-6 menu_element" id="menu_element">Lists</p>
         </li>
       </ul>
       <div

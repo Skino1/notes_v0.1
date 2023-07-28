@@ -46,7 +46,8 @@ function getTemplateNote(note, index) {
 }
 
 function getAddNote() {
-  return `      <div
+  return `      
+        <div
         id="note_add"
         class="group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex flex-col"
       >
