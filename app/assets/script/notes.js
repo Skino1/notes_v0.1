@@ -1,15 +1,9 @@
-const notes = [
-  {
-    title: "123",
-    text: "123",
-    checked: false,
-  },
-];
+const notes = [];
 
 const inputTitleNote = document.querySelector("#note_title");
 const inputTextNote = document.querySelector("#note_text");
 const listOfNotes = document.querySelector("#list_notes");
-const noteElement = document.querySelector("#note");
+
 
 const addNoteBtn = document.querySelector("#add_button");
 const checkBtn = document.querySelector("#check_button");
@@ -25,7 +19,9 @@ function getTemplateNote(note, index) {
         >
           <p class="font-bold mb-2 p-1">${note.title}</p>
           <textarea
-            class="resize-none bg-slate-300 rounded-md"
+            class="resize-none ${
+              note.checked ? "bg-slate-500" : "bg-slate-300"
+            } rounded-md"
             type="text"
             id="note_add_input"
             rows="5"
@@ -45,40 +41,12 @@ function getTemplateNote(note, index) {
         </div>`;
 }
 
-function getAddNote() {
-  return `      
-        <div
-        id="note_add"
-        class="group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex flex-col"
-      >
-        <input
-          class="font-bold mb-2 p-1 rounded-md"
-          id="note_title"
-          placeholder="Add new note"
-        />
-        <textarea
-          class="resize-none bg-slate-300 rounded-md"
-          type="text"
-          id="note_text"
-          rows="5"
-          placeholder="Type here"
-        ></textarea>
-        <div
-          class="collapse group-hover:visible flex flex-nowrap justify-end pt-1"
-          id="buttons"
-        >
-          <button
-            class="filter-blue bg-[url('assets/svg/add-circle.svg')] w-5 h-5" id="add_button"
-          ></button>
-        </div>
-      </div>`;
-}
-
-updateListOfNotes();
-
 function updateListOfNotes() {
-  listOfNotes.innerHTML = "";
-  listOfNotes.insertAdjacentHTML("beforeend", getAddNote());
+  let noteElements = document.querySelectorAll("#note");
+  for (let index = 0; index < noteElements.length; index++) {
+    const element = noteElements[index];
+    element.remove()
+  }   
   for (let index = 0; index < notes.length; index++) {
     listOfNotes.insertAdjacentHTML(
       "beforeend",
@@ -89,8 +57,8 @@ function updateListOfNotes() {
 
 addNoteBtn.onclick = function () {
   if (
-    (inputTitleNote.value.length === 0) |
-    (inputTextNote.value.length === 0)
+    (inputTitleNote.value == '') |
+    (inputTextNote.value == '')
   ) {
     return;
   }

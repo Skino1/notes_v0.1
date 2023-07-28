@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="assets/script/app.js" defer></script>
+    <script src="assets/script/notes.js" defer></script>
     <script src="assets/script/menu.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -28,13 +28,36 @@
           brightness(102%) contrast(97%);
       }
       .filter-blue {
-        filter: invert(38%) sepia(79%) saturate(2856%) hue-rotate(177deg) brightness(90%) contrast(98%);
+        filter: invert(38%) sepia(79%) saturate(2856%) hue-rotate(177deg)
+          brightness(90%) contrast(98%);
+      }
+      @media (min-height:300px){
+      #list_notes {
+        display: grid;
+        grid-template-rows: repeat(1, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      }
+      @media (min-height:730px) {
+        #list_notes {
+        display: grid;
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      }
+      @media (min-height:1000px) {
+        #list_notes {
+        display: grid;
+        grid-template-rows: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
       }
     </style>
     <title>NoteS</title>
   </head>
   <body
-    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.10fr_1fr_0.1fr] bg-slate-900 h-screen" id="body_container"
+    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.10fr_1fr_0.1fr] bg-slate-900 h-screen"
+    id="body_container"
   >
     <header
       class="bg-slate-900 grid grid-cols-[0.25fr_1fr] grid-rows-1 py-4 row-start-1 row-end-2 col-start-1 col-end-3"
@@ -43,8 +66,8 @@
         class="header__profile flex flex-nowrap row-start-1 row-end-2 col-start-1 col-end-2 items-center"
       >
         <img
-          id="menu"
-          class="filter-white ml-5 cursor-pointer"
+          id="menu_button"
+          class="filter-white ml-7 cursor-pointer"
           width="24px"
           height="24px"
           src="assets/svg/menu-outline.svg"
@@ -62,80 +85,91 @@
       <div
         class="header__user_menu flex row-start-1 row-end-2 col-start-2 col-end-3 justify-end"
       >
-        <ul class="header__list flex flex-nowrap ">
-          <li
-            class="header__list_element list-none pr-5 flex flex-nowrap items-center"
-          >
-            <img
-              class="filter-white"
-              height="16px"
-              width="16px"
-              src="assets/svg/contrast-outline.svg"
-              alt="theme_icon"
-            />
-            <p class="pl-1">Theme</p>
-            
-          </li>
-          <li
-            class="header__list_element"
-          >
-          <a class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center" href="">
-            <img
-              class="filter-white"
-              height="16px"
-              width="16px"
-              src="assets/svg/information-outline.svg"
-              alt="about_icon"
-            />
-            <p>About</p>
+        <ul class="header__list flex flex-nowrap">
+          <li class="header__list_element flex flex-nowrap">
+            <a
+              class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center"
+              href=""
+            >
+              <img
+                class="filter-white"
+                height="16px"
+                width="16px"
+                src="assets/svg/contrast-outline.svg"
+                alt="theme_icon"
+              />
+              <p class="pl-1">Theme</p>
             </a>
           </li>
-          <li
-            class="header__list_element list-none pr-5 flex flex-nowrap items-center"
-          >
-            <img
-              class="filter-white"
-              height="16px"
-              width="16px"
-              src="assets/svg/help-outline.svg"
-              alt="help_icon"
-            />
-            <p>Help</p>
+          <li class="header__list_element flex flex-nowrap">
+            <a
+              class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center"
+              href=""
+            >
+              <img
+                class="filter-white"
+                height="16px"
+                width="16px"
+                src="assets/svg/information-outline.svg"
+                alt="about_icon"
+              />
+              <p>About</p>
+            </a>
+          </li>
+          <li class="header__list_element flex flex-nowrap">
+            <a
+              class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center"
+              href=""
+            >
+              <img
+                class="filter-white"
+                height="16px"
+                width="16px"
+                src="assets/svg/help-outline.svg"
+                alt="help_icon"
+              />
+              <p>Help</p>
+            </a>
           </li>
         </ul>
       </div>
     </header>
     <aside
-      class="side-menu bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col"
+      class="side-menu bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col" id="menu"
     >
       <ul class="side-menu__list flex flex-col last:justify-end">
         <li
-          class="side_menu__list_element md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl bg-slate-700 md:m-4 sm:m-1"
+          class="side_menu__list_element md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl bg-slate-700 md:my-1 md:mx-4 sm:mx-1"
+          id="menu_element" data-type="menu_notes"
         >
           <img
-            class="filter-white "
+            class="filter-white"
             src="assets/svg/document-outline.svg"
             height="32px"
             width="32px"
             alt="notes_icon"
+            id="menu_icon"
           />
-          <p class="ml-5 menu_element" id="menu_element">Notes</p>
+          <p class="ml-5" id="menu_element_title">Notes</p>
         </li>
         <li
-          class=" side_menu__list_element md:p-5 sm:p-1  flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:m-4 sm:m-1"
+          class="side_menu__list_element md:p-5 sm:p-1 flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:mx-4 sm:mx-1"
+          id="menu_element" data-type="menu_lists"
         >
           <img
-            class="filter-white "
+            class="filter-white"
             src="assets/svg/list-outline.svg"
             height="32px"
             width="32px"
             alt="lists_icon"
+            id="menu_icon"
           />
-          <p class="ml-6 menu_element" id="menu_element">Lists</p>
+          <p class="ml-6" id="menu_element_title">Lists</p>
         </li>
       </ul>
       <div
-        class="side__profile flex flex-nowrap items-center rounded-xl bg-slate-700 m-4 p-5"
+        class="side__profile flex flex-nowrap items-center rounded-xl bg-slate-700 md:m-4 sm:m-1 md:p-5 sm:p-1"
+        id="menu_element" data-type="menu_user"
       >
         <img
           class="filter-white"
@@ -143,14 +177,41 @@
           width="32px"
           height="32px"
           alt="Userpic"
+          id="menu_icon"
         />
-        <div class="text-center pl-5">User</div>
+        <div class="text-center pl-5" id="menu_element_title">User</div>
       </div>
     </aside>
     <main
-      class="grid grid-cols-4 grid-rows-4 auto-rows-min row-start-2 row-end-3 col-start-2 col-end-3 bg-white rounded-l-3xl" id="list_notes"
+      class="grid md:grid-cols-4 md:grid-rows-4 es:grid-cols-3 es:grid-rows-1 row-start-2 row-end-3 col-start-2 col-end-3 bg-white rounded-l-3xl"
+      id="list_notes"
     >
-
+      <div
+        id="note_add"
+        class="group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex flex-col"
+      >
+        <input
+          class="font-bold mb-2 p-1 rounded-md"
+          id="note_title"
+          placeholder="Add new note"
+        />
+        <textarea
+          class="resize-none bg-slate-300 rounded-md"
+          type="text"
+          id="note_text"
+          rows="5"
+          placeholder="Type here"
+        ></textarea>
+        <div
+          class="collapse group-hover:visible flex flex-nowrap justify-end pt-1"
+          id="buttons"
+        >
+          <button
+            class="filter-blue bg-[url('assets/svg/add-circle.svg')] w-5 h-5"
+            id="add_button"
+          ></button>
+        </div>
+      </div>
     </main>
     <footer class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto">
       <div class="copyrights flex justify-end pr-5">Disigned by Skino 2023</div>
