@@ -21,10 +21,9 @@ function getTemplateNote(note, index) {
           <textarea
             class="resize-none ${
               note.checked ? "bg-slate-500" : "bg-slate-300"
-            } rounded-md"
+            } rounded-md h-full"
             type="text"
             id="note_add_input"
-            rows="5"
             placeholder="Type here"
             disabled
           >${note.text}</textarea>

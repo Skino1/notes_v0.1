@@ -2,68 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="assets/script/notes.js" defer></script>
     <script src="assets/script/menu.js" defer></script>
+    <script src="assets/script/notes.js" defer></script>
+    <script src="assets/script/theme.js" defer></script>
+    <script src="assets/script/actions.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="shortcut icon"
       href="assets/svg/documents-outline.svg"
       type="image/x-icon"
     />
+    <link rel="stylesheet" href="assets/css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style type="text/css">
-      body {
-        color: aliceblue;
-      }
-      .filter-white {
-        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(152deg)
-          brightness(103%) contrast(103%);
-      }
-      .filter-green {
-        filter: invert(56%) sepia(30%) saturate(2681%) hue-rotate(48deg)
-          brightness(91%) contrast(90%);
-      }
-      .filter-red {
-        filter: invert(19%) sepia(79%) saturate(2790%) hue-rotate(346deg)
-          brightness(102%) contrast(97%);
-      }
-      .filter-blue {
-        filter: invert(38%) sepia(79%) saturate(2856%) hue-rotate(177deg)
-          brightness(90%) contrast(98%);
-      }
-      @media (min-height:300px){
-      #list_notes {
-        display: grid;
-        grid-template-rows: repeat(1, minmax(0, 1fr));
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      }
-      @media (min-height:730px) {
-        #list_notes {
-        display: grid;
-        grid-template-rows: repeat(3, minmax(0, 1fr));
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-      }
-      @media (min-height:1000px) {
-        #list_notes {
-        display: grid;
-        grid-template-rows: repeat(4, minmax(0, 1fr));
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-      }
-    </style>
     <title>NoteS</title>
   </head>
   <body
-    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.10fr_1fr_0.1fr] bg-slate-900 h-screen"
+    class="grid grid-cols-[0.25fr_1fr] grid-rows-[0.05fr_1fr_0.05fr] bg-slate-900 h-screen"
     id="body_container"
   >
     <header
       class="bg-slate-900 grid grid-cols-[0.25fr_1fr] grid-rows-1 py-4 row-start-1 row-end-2 col-start-1 col-end-3"
     >
       <div
-        class="header__profile flex flex-nowrap row-start-1 row-end-2 col-start-1 col-end-2 items-center"
+        class="flex flex-nowrap row-start-1 row-end-2 col-start-1 col-end-2 items-center"
       >
         <img
           id="menu_button"
@@ -83,14 +44,10 @@
         <p class="header__company pl-1">NoteS</p>
       </div>
       <div
-        class="header__user_menu flex row-start-1 row-end-2 col-start-2 col-end-3 justify-end"
+        class="flex row-start-1 row-end-2 col-start-2 col-end-3 justify-end pr-2"
       >
-        <ul class="header__list flex flex-nowrap">
-          <li class="header__list_element flex flex-nowrap">
-            <a
-              class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center"
-              href=""
-            >
+        <ul class="flex flex-nowrap">
+          <li class=" md:pr-5 sm:pr-1 flex flex-nowrap items-center" id="theme_switch">
               <img
                 class="filter-white"
                 height="16px"
@@ -99,13 +56,8 @@
                 alt="theme_icon"
               />
               <p class="pl-1">Theme</p>
-            </a>
           </li>
-          <li class="header__list_element flex flex-nowrap">
-            <a
-              class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center"
-              href=""
-            >
+          <li class="md:pr-5 sm:pr-1 flex flex-nowrap items-center" id="about_button">
               <img
                 class="filter-white"
                 height="16px"
@@ -114,13 +66,8 @@
                 alt="about_icon"
               />
               <p>About</p>
-            </a>
           </li>
-          <li class="header__list_element flex flex-nowrap">
-            <a
-              class="list-none md:pr-5 sm:pr-1 flex flex-nowrap items-center"
-              href=""
-            >
+          <li class=" md:pr-5 sm:pr-1 flex flex-nowrap items-center" id="help_button">
               <img
                 class="filter-white"
                 height="16px"
@@ -129,17 +76,16 @@
                 alt="help_icon"
               />
               <p>Help</p>
-            </a>
           </li>
         </ul>
       </div>
     </header>
     <aside
-      class="side-menu bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col" id="menu"
+      class="bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col" id="menu"
     >
-      <ul class="side-menu__list flex flex-col last:justify-end">
+      <ul class="flex flex-col last:justify-end">
         <li
-          class="side_menu__list_element md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl bg-slate-700 md:my-1 md:mx-4 sm:mx-1"
+          class="md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl md:my-1 md:mx-4 sm:mx-1"
           id="menu_element" data-type="menu_notes"
         >
           <img
@@ -153,7 +99,7 @@
           <p class="ml-5" id="menu_element_title">Notes</p>
         </li>
         <li
-          class="side_menu__list_element md:p-5 sm:p-1 flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:mx-4 sm:mx-1"
+          class="md:p-5 sm:p-1 flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:mx-4 sm:mx-1"
           id="menu_element" data-type="menu_lists"
         >
           <img
@@ -168,7 +114,7 @@
         </li>
       </ul>
       <div
-        class="side__profile flex flex-nowrap items-center rounded-xl bg-slate-700 md:m-4 sm:m-1 md:p-5 sm:p-1"
+        class="flex flex-nowrap items-center rounded-xl bg-slate-700 hover:bg-slate-800 md:m-4 sm:m-1 md:p-5 sm:p-1"
         id="menu_element" data-type="menu_user"
       >
         <img
@@ -183,7 +129,7 @@
       </div>
     </aside>
     <main
-      class="grid md:grid-cols-4 md:grid-rows-4 es:grid-cols-3 es:grid-rows-1 row-start-2 row-end-3 col-start-2 col-end-3 bg-white rounded-l-3xl"
+      class="grid xl:grid-cols-4 xl:grid-rows-4 row-start-2 row-end-3 col-start-2 col-end-3 bg-white dark:bg-slate-700 rounded-l-3xl"
       id="list_notes"
     >
       <div
@@ -196,10 +142,9 @@
           placeholder="Add new note"
         />
         <textarea
-          class="resize-none bg-slate-300 rounded-md"
+          class="resize-none bg-slate-300 rounded-md h-full"
           type="text"
           id="note_text"
-          rows="5"
           placeholder="Type here"
         ></textarea>
         <div
@@ -213,8 +158,43 @@
         </div>
       </div>
     </main>
-    <footer class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto">
-      <div class="copyrights flex justify-end pr-5">Disigned by Skino 2023</div>
+    <footer class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto" id="footer">
+      <div class="copyrights flex justify-end pr-5">VIP Disigned by Skino 2023</div>
     </footer>
+    <div class="invisible flex items-center justify-center fixed left-0 top-0 w-screen h-screen overflow-auto bg-slate-950/50" id="modal_background">
+      <div class="bg-slate-100 dark:bg-slate-700 mx-auto h-[80%] py-3 px-5 w-[80%] rounded-3xl" id="modal_window">
+        <span class="text-slate-600 float-right text-3xl font-bold cursor-pointer hover:text-slate-800 flex align-top" id="close_window">&times;</span>
+        <p class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2">About NoteS</p>
+        <div class="flex flex-row justify-center pt-5">
+          <img
+          class="filter-blue"
+          width="256px"
+          height="256px"
+          src="assets/svg/documents-outline.svg"
+          alt="logo"
+          />
+          <span class="uppercase font-bold text-black text-[100px] align-middle">notes</span>
+        </div>
+      </div>
+    </div>
+    <div class="invisible flex items-center justify-center fixed left-0 top-0 w-screen h-screen overflow-auto bg-slate-950/50" id="modal_background">
+      <div class="bg-slate-100 dark:bg-slate-700 mx-auto h-[80%] py-3 px-5 w-[80%] rounded-3xl" id="modal_window">
+        <span class="text-slate-600 float-right text-3xl font-bold cursor-pointer hover:text-slate-800 flex align-top" id="close_window">&times;</span>
+        <p class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2">Help</p>
+        <div class="flex flex-row justify-center pt-5">
+          <span class="uppercase font-bold text-black text-[100px] align-middle">Сам себе помоги</span>
+        </div>
+      </div>
+    </div>
+    <div class="invisible flex items-center justify-center fixed left-0 top-0 w-screen h-screen overflow-auto bg-slate-950/50" id="modal_background">
+      <div class="bg-slate-100 dark:bg-slate-700 mx-auto h-[80%] py-3 px-5 w-[80%] rounded-3xl" id="modal_window">
+        <span class="text-slate-600 float-right text-3xl font-bold cursor-pointer hover:text-slate-800 flex align-top" id="close_window">&times;</span>
+        <p class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2">About NoteS</p>
+        <div class="flex flex-row justify-center pt-5">
+          <span class="uppercase font-bold text-black text-[100px] align-middle">User</span>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
