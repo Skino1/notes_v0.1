@@ -4,10 +4,11 @@ const inputTitleNote = document.querySelector("#note_title");
 const inputTextNote = document.querySelector("#note_text");
 const listOfNotes = document.querySelector("#list_notes");
 
-
 const addNoteBtn = document.querySelector("#add_button");
 const checkBtn = document.querySelector("#check_button");
 const removeBtn = document.querySelector("#remove_button");
+
+const sortList = document.querySelector("#sort_sel");
 
 function getTemplateNote(note, index) {
   return `
@@ -44,8 +45,8 @@ function updateListOfNotes() {
   let noteElements = document.querySelectorAll("#note");
   for (let index = 0; index < noteElements.length; index++) {
     const element = noteElements[index];
-    element.remove()
-  }   
+    element.remove();
+  }
   for (let index = 0; index < notes.length; index++) {
     listOfNotes.insertAdjacentHTML(
       "beforeend",
@@ -53,14 +54,22 @@ function updateListOfNotes() {
     );
   }
 }
-
 addNoteBtn.onclick = function () {
-  if (
-    (inputTitleNote.value == '') |
-    (inputTextNote.value == '')
-  ) {
+  if (inputTitleNote.value == "") {
+    inputTitleNote.classList.add("bg-red-400");
+    setTimeout(function () {
+      inputTitleNote.classList.remove("bg-red-400");
+    }, 1000);
     return;
   }
+  if (inputTextNote.value == "") {
+    inputTextNote.classList.add("bg-red-400");
+    setTimeout(function () {
+      inputTextNote.classList.remove("bg-red-400");
+    }, 1000);
+    return;
+  }
+
   const newNote = {
     title: inputTitleNote.value,
     text: inputTextNote.value,
@@ -85,3 +94,5 @@ listOfNotes.onclick = function (event) {
   }
   updateListOfNotes();
 };
+
+sortList.addEventListener("change", function (e) {});

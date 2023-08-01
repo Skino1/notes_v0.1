@@ -12,7 +12,7 @@
       href="assets/svg/documents-outline.svg"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NoteS</title>
   </head>
@@ -44,49 +44,80 @@
         <p class="header__company pl-1">NoteS</p>
       </div>
       <div
-        class="flex row-start-1 row-end-2 col-start-2 col-end-3 justify-end pr-2"
+        class="flex row-start-1 row-end-2 col-start-2 col-end-3 justify-between pr-2"
       >
+        <div class="flex flex-nowrap">
+          <img
+            class="filter-white"
+            height="18px"
+            width="18px"
+            src="assets/svg/swap-vertical-outline.svg"
+            alt="theme_icon"
+          />
+          <select
+            class="text-black rounded-md bg-slate-200 ml-5"
+            name="sort"
+            id="sort_sel"
+          >
+            <option value="all">All</option>
+            <option value="complited">Complited</option>
+            <option value="active">Active</option>
+          </select>
+        </div>
         <ul class="flex flex-nowrap">
-          <li class=" md:pr-5 sm:pr-1 flex flex-nowrap items-center" id="theme_switch">
-              <img
-                class="filter-white"
-                height="16px"
-                width="16px"
-                src="assets/svg/contrast-outline.svg"
-                alt="theme_icon"
-              />
-              <p class="pl-1">Theme</p>
+          <li
+            class="md:pr-5 sm:pr-1 flex flex-nowrap items-center cursor-pointer"
+            id="theme_switch"
+          >
+            <img
+              class="filter-white"
+              height="16px"
+              width="16px"
+              src="assets/svg/contrast-outline.svg"
+              alt="theme_icon"
+            />
+            <p class="pl-1">Theme</p>
           </li>
-          <li class="md:pr-5 sm:pr-1 flex flex-nowrap items-center" id="modal_btn" data-index="modal_1">
-              <img
-                class="filter-white"
-                height="16px"
-                width="16px"
-                src="assets/svg/information-outline.svg"
-                alt="about_icon"
-              />
-              <p>About</p>
+          <li
+            class="md:pr-5 sm:pr-1 flex flex-nowrap items-center cursor-pointer"
+            id="modal_btn"
+            data-index="modal_1"
+          >
+            <img
+              class="filter-white"
+              height="16px"
+              width="16px"
+              src="assets/svg/information-outline.svg"
+              alt="about_icon"
+            />
+            <p>About</p>
           </li>
-          <li class=" md:pr-5 sm:pr-1 flex flex-nowrap items-center" id="modal_btn" data-index="modal_2">
-              <img
-                class="filter-white"
-                height="16px"
-                width="16px"
-                src="assets/svg/help-outline.svg"
-                alt="help_icon"
-              />
-              <p>Help</p>
+          <li
+            class="md:pr-5 sm:pr-1 flex flex-nowrap items-center cursor-pointer"
+            id="modal_btn"
+            data-index="modal_2"
+          >
+            <img
+              class="filter-white"
+              height="16px"
+              width="16px"
+              src="assets/svg/help-outline.svg"
+              alt="help_icon"
+            />
+            <p>Help</p>
           </li>
         </ul>
       </div>
     </header>
     <aside
-      class="bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col" id="menu"
+      class="bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col"
+      id="menu"
     >
       <ul class="flex flex-col last:justify-end">
         <li
-          class="md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl md:my-1 md:mx-4 sm:mx-1"
-          id="menu_element" data-type="menu_notes"
+          class="menu_element md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl md:my-1 md:mx-4 sm:mx-1 cursor-pointer"
+          id="menu_element"
+          data-type="menu_notes"
         >
           <img
             class="filter-white"
@@ -99,8 +130,9 @@
           <p class="ml-5" id="menu_element_title">Notes</p>
         </li>
         <li
-          class="md:p-5 sm:p-1 flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:mx-4 sm:mx-1"
-          id="menu_element" data-type="menu_lists"
+          class="menu_element md:p-5 sm:p-1 flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:mx-4 sm:mx-1 cursor-pointer"
+          id="menu_element"
+          data-type="menu_lists"
         >
           <img
             class="filter-white"
@@ -114,8 +146,9 @@
         </li>
       </ul>
       <div
-        class="flex flex-nowrap items-center rounded-xl bg-slate-700 hover:bg-slate-800 md:m-4 sm:m-1 md:p-5 sm:p-1"
-        id="menu_element" data-type="menu_user"
+        class="menu_element flex flex-nowrap items-center rounded-xl bg-slate-700 hover:bg-slate-800 md:m-4 sm:m-1 md:p-5 sm:p-1 cursor-pointer"
+        id="modal_btn"
+        data-index="modal_3"
       >
         <img
           class="filter-white"
@@ -157,31 +190,104 @@
           ></button>
         </div>
       </div>
-    </main>
-    <footer class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto" id="footer">
-      <div class="copyrights flex justify-end pr-5">VIP Disigned by Skino 2023</div>
-    </footer>
-    <div class="invisible flex items-center justify-center fixed left-0 top-0 w-screen h-screen overflow-auto bg-slate-950/50" id="modal_background">
-      <div class="bg-slate-100 dark:bg-slate-700 mx-auto h-[80%] py-3 px-5 w-[80%] rounded-3xl" id="modal_window">
-        <span class="text-slate-600 float-right text-3xl font-bold cursor-pointer hover:text-slate-800 flex align-top" id="close_window" >&times;</span>
-        <div class="hidden" data-index="modal_1" id="modal_content">
-        <p class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2">About NoteS</p>
-        <div class="flex flex-row justify-center pt-5">
-          <img
-          class="filter-blue"
-          width="256px"
-          height="256px"
-          src="assets/svg/documents-outline.svg"
-          alt="logo"
+      <div
+        id="list_add"
+        class="hidden group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex-col"
+      >
+        <input
+          class="font-bold mb-2 p-1 rounded-md"
+          id="list_title"
+          placeholder="Add new list"
+        />
+        <div class="flex justify-between items-center">
+          <input
+            class="resize-none bg-slate-300 rounded-md w-full"
+            type="text"
+            id="list_elements"
+            placeholder="Type here"
           />
-          <span class="uppercase font-bold text-black text-[100px] align-middle">notes</span>
+          <button
+            class=" filter-blue bg-[url('assets/svg/add-circle.svg')] ml-1 w-5 h-5"
+            id="add_new_row"
+          ></button>
         </div>
+        <div
+          class="collapse group-hover:visible flex flex-nowrap justify-end pt-1"
+          id="buttons"
+        >
+          <button
+            class="filter-blue bg-[url('assets/svg/add-circle.svg')] w-5 h-5"
+            id="add_button"
+          ></button>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto"
+      id="footer"
+    >
+      <div class="copyrights flex justify-end pr-5">
+        VIP Disigned by Skino 2023
+      </div>
+    </footer>
+    <div
+      class="invisible flex items-center justify-center fixed left-0 top-0 w-screen h-screen overflow-auto bg-slate-950/50"
+      id="modal_background"
+    >
+      <div
+        class="bg-slate-100 dark:bg-slate-700 mx-auto h-[80%] py-3 px-5 w-[80%] rounded-3xl"
+        id="modal_window"
+      >
+        <span
+          class="text-slate-600 float-right text-3xl font-bold cursor-pointer hover:text-slate-800 flex align-top"
+          id="close_window"
+          >&times;</span
+        >
+        <div class="hidden" data-index="modal_1" id="modal_content">
+          <p
+            class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2"
+          >
+            About NoteS
+          </p>
+          <div class="flex flex-row justify-center pt-5">
+            <img
+              class="filter-blue"
+              width="256px"
+              height="256px"
+              src="assets/svg/documents-outline.svg"
+              alt="logo"
+            />
+            <span
+              class="uppercase font-bold text-black text-[100px] align-middle"
+              >notes</span
+            >
+          </div>
         </div>
         <div class="hidden" data-index="modal_2" id="modal_content">
-        <p class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2">Help</p>
-        <div class="flex flex-row justify-center pt-5">
-          <span class="uppercase font-bold text-black text-[100px] align-middle">Сам себе помоги</span>
+          <p
+            class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2"
+          >
+            Help
+          </p>
+          <div class="flex flex-row justify-center pt-5">
+            <span
+              class="uppercase font-bold text-black text-[100px] align-middle"
+              >Сам себе помоги</span
+            >
+          </div>
         </div>
+        <div class="hidden" data-index="modal_3" id="modal_content">
+          <p
+            class="text-black dark:text-white font-bold text-3lx uppercase text-center pt-2"
+          >
+            Profile
+          </p>
+          <div class="flex flex-row justify-center pt-5">
+            <span
+              class="uppercase font-bold text-black text-[100px] align-middle"
+              >Guest</span
+            >
+          </div>
         </div>
       </div>
     </div>
