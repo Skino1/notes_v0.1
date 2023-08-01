@@ -1,32 +1,55 @@
-const modalBackg = document.querySelectorAll("#modal_background");
+class Modal {
+  constructor() {
+    this.modal = document.querySelector("#modal_background");
+    this.modalWindow = document.querySelector("#modal_window");
+    this.modalTriggers = Array.from(document.querySelectorAll("#modal_btn"));
+    this.modalContent = Array.from(document.querySelectorAll("#modal_content"));
+    this.closeButton = document.querySelector("#close_window");
+    this.activeIndex = null;
 
-const aboutBtn = document.querySelector("#about_button");
-const helpBtn = document.querySelector("#help_button");
-
-const closeBtn = document.querySelectorAll("#close_window");
-const modalWindows = document.querySelectorAll("#modal_window");
-
-
-window.onclick = function (event) {
-  if (event.target == modalBackg) {
-    modalBackg.classList.remove("visible");
-    modalBackg.classList.add("invisible");
+    this.init();
   }
-};
 
-  aboutBtn.onclick = function () {
-    if (modalBackg[0].classList.add("visible")) {
-      modalBackg[0].classList.add("invisible");
-      modalBackg[0].classList.remove("visible");
-    } else {
-      modalBackg[0].classList.remove("invisible");
-      modalBackg[0].classList.add("visible");
+  init() {
+    this.modalTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const index = trigger.dataset.index;
+        this.openModal(index);
+      });
+    });
+
+    this.closeButton.addEventListener("click", () => {
+      this.closeModal();
+    });
+
+    window.addEventListener("click", (event) => {
+      if (event.target === this.modal) {
+        this.closeModal();
+      }
+    });
+  }
+
+  openModal(index) {
+    this.activeIndex = index;
+    this.modal.classList.remove("invisible");
+    for (let i = 0; i < this.modalContent.length; i++) {
+      const element = this.modalContent[i];
+      if (element.dataset.index == this.activeIndex) {
+        element.classList.remove('hidden');
+      }
     }
-  };
-  for (let index = 0; index < closeBtn.length; index++) {
-    const element = closeBtn[index];
-    element.onclick = function () {
-      modalBackg[0].classList.remove("visible");
-      modalBackg[0].classList.add("invisible");
-    };
   }
+
+  closeModal() {
+    this.modal.classList.add("invisible");
+        for (let i = 0; i < this.modalContent.length; i++) {
+          const element = this.modalContent[i];
+          if (element.dataset.index == this.activeIndex) {
+            element.classList.add("hidden");
+          }
+        }
+    this.activeIndex = null;
+  }
+}
+
+new Modal();
