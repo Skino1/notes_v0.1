@@ -1,30 +1,36 @@
 const notes = [];
 
-const inputTitleNote = document.querySelector("#note_title");
-const inputTextNote = document.querySelector("#note_text");
+const inputTitleNote = document.querySelector(".note_title");
+const inputTextNote = document.querySelector(".note_text");
 const listOfNotes = document.querySelector("#list_notes");
 
+const listAddBody = document.querySelector("#add_list");
+const inputTitleList = document.querySelector(".list_title");
+const inputTextList = document.querySelector(".list_text");
+
+const noteBtn = document.querySelector("#buttons");
 const addNoteBtn = document.querySelector("#add_button");
-const checkBtn = document.querySelector("#check_button");
-const removeBtn = document.querySelector("#remove_button");
+const addNewRow = document.querySelector("#add_new_row");
+const checkBtn = document.querySelector(".check_button");
+const removeBtn = document.querySelector(".remove_button");
 
 const sortList = document.querySelector("#sort_sel");
+const filteredList = document.querySelector("#filter_sel");
 
 function getTemplateNote(note, index) {
   return `
             <div
-            id="note"
+            id="note_${index}"
           class="${
             note.checked ? "bg-slate-500" : "bg-slate-300"
           } group text-black p-2 m-2 rounded-xl flex flex-col"
         >
-          <p class="font-bold mb-2 p-1">${note.title}</p>
+          <p class="note_title font-bold mb-2 p-1">${note.title}</p>
           <textarea
-            class="resize-none ${
+            class="note_text resize-none ${
               note.checked ? "bg-slate-500" : "bg-slate-300"
             } rounded-md h-full"
             type="text"
-            id="note_add_input"
             placeholder="Type here"
             disabled
           >${note.text}</textarea>
@@ -32,26 +38,67 @@ function getTemplateNote(note, index) {
             class="invisible group-hover:visible flex flex-nowrap justify-end pt-1"
           >
             <button
-              class="filter-green bg-[url('assets/svg/checkmark-circle.svg')] w-5 h-5" id="check_button" data-type="toggle" data-index="${index}"
+              class="check_button filter-green bg-[url('assets/svg/checkmark-circle.svg')] w-5 h-5"  data-type="toggle" data-index="${index}"
             ></button>
             <button
-              class="filter-red bg-[url('assets/svg/close-circle.svg')] w-5 h-5" id="remove_button" data-type="remove" data-index="${index}"
+              class="remove_button filter-red bg-[url('assets/svg/close-circle.svg')] w-5 h-5"  data-type="remove" data-index="${index}"
             ></button>
           </div>
         </div>`;
 }
 
-function updateListOfNotes() {
-  let noteElements = document.querySelectorAll("#note");
+function getTemplateList(note, index) {
+  let text = note.text;
+  let lines = text.split("\n");
+  let ulContent = ""; // Создаем элемент <ul>
+
+  for (let i = 0; i < lines.length; i++) {
+    let li = document.createElement("li"); // Создаем элемент <li>
+    li.appendChild(document.createTextNode(lines[i])); // Добавляем текст строки в элемент <li>
+    ulContent += `<li>${lines[i]}</li>`;
+  }
+  return `
+            <div
+            id="note_${index}"
+          class="${
+            note.checked ? "bg-slate-500" : "bg-slate-300"
+          } group text-black p-2 m-2 rounded-xl flex flex-col"
+        >
+          <p class="note_title font-bold mb-2 p-1">${note.title}</p>
+          <ul class="note_text list-disc list-inside h-full ${
+            note.checked ? "bg-slate-500" : "bg-slate-300"
+          }">${ulContent}</ul>
+          <div
+            class="invisible group-hover:visible flex flex-nowrap justify-end pt-1"
+          >
+            <button
+              class="check_button filter-green bg-[url('assets/svg/checkmark-circle.svg')] w-5 h-5"  data-type="toggle" data-index="${index}"
+            ></button>
+            <button
+              class="remove_button filter-red bg-[url('assets/svg/close-circle.svg')] w-5 h-5"  data-type="remove" data-index="${index}"
+            ></button>
+          </div>
+        </div>`;
+}
+
+function updateListOfNotes(arrayOfNotes = notes) {
+  let noteElements = document.querySelectorAll("[id^=note_]");
   for (let index = 0; index < noteElements.length; index++) {
     const element = noteElements[index];
     element.remove();
   }
-  for (let index = 0; index < notes.length; index++) {
-    listOfNotes.insertAdjacentHTML(
-      "beforeend",
-      getTemplateNote(notes[index], index)
-    );
+  for (let index = 0; index < arrayOfNotes.length; index++) {
+    if (arrayOfNotes[index].type == "note") {
+      listOfNotes.insertAdjacentHTML(
+        "beforeend",
+        getTemplateNote(arrayOfNotes[index], index)
+      );
+    } else if (arrayOfNotes[index].type == "list") {
+      listOfNotes.insertAdjacentHTML(
+        "beforeend",
+        getTemplateList(arrayOfNotes[index], index)
+      );
+    }
   }
 }
 addNoteBtn.onclick = function () {
@@ -69,11 +116,12 @@ addNoteBtn.onclick = function () {
     }, 1000);
     return;
   }
-
   const newNote = {
     title: inputTitleNote.value,
     text: inputTextNote.value,
     checked: false,
+    createdAt: new Date(),
+    type: typeOfNotes,
   };
   notes.push(newNote);
   updateListOfNotes();
@@ -95,4 +143,29 @@ listOfNotes.onclick = function (event) {
   updateListOfNotes();
 };
 
-sortList.addEventListener("change", function (e) {});
+sortList.addEventListener("change", function (e) {
+  const selectedOption = e.target.value;
+  if (selectedOption === "active") {
+    notes.sort((a, b) => a.checked - b.checked);
+  } else if (selectedOption === "completed") {
+    notes.sort((a, b) => b.checked - a.checked);
+  } else if (selectedOption === "date") {
+    notes.sort((a, b) => a.createdAt - b.createdAt);
+  }
+
+  updateListOfNotes();
+});
+
+filteredList.addEventListener("change", function (e) {
+  const selectedOption = e.target.value;
+  let filteredNotes = [];
+  if (selectedOption === "active") {
+    filteredNotes = notes.filter((note) => !note.checked);
+    updateListOfNotes(filteredNotes);
+  } else if (selectedOption === "completed") {
+    filteredNotes = notes.filter((note) => note.checked);
+    updateListOfNotes(filteredNotes);
+  } else if (selectedOption === "all") {
+    updateListOfNotes();
+  }
+});
