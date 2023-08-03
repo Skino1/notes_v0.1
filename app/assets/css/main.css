@@ -47,7 +47,7 @@ body {
 }
 
 @media (max-width: 500px) and (orientation: portrait) {
-  #menu {
+  #menu_desktop {
     display: none;
   }
 
