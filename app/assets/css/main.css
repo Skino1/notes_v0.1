@@ -83,6 +83,9 @@ body {
   .mobile_profile {
     display: flex;
   }
+  #list_notes {
+    padding-bottom: 4em;
+  }
 }
 
 @media (max-height: 500px) and (max-width: 1200px) and (orientation: landscape) {

@@ -25,7 +25,11 @@ noteElement.forEach(element => {
 });
 
 menuBtn.addEventListener("click", function () {
+  if (body.classList.contains("grid-cols-[0.20fr_1fr]")) {
     body.classList.replace("grid-cols-[0.20fr_1fr]", "grid-cols-[0.05fr_1fr]");
+  } else {
+    body.classList.replace("grid-cols-[0.05fr_1fr]","grid-cols-[0.20fr_1fr]"); 
+  }
   for (let i = 0; i < menuElTitle.length; i++) {
     const element = menuElTitle[i];
       element.classList.toggle("hidden");
@@ -38,7 +42,12 @@ menuBtn.addEventListener("click", function () {
       element.classList.replace("md:p-3", "md:p-5");
     }
   }
-    menuDesktop.classList.toggle("w-20");
+  if (menuDesktop.classList.contains("w-full")) {
+    menuDesktop.classList.replace("w-full", "w-20");    
+  } else {
+      menuDesktop.classList.replace("w-20", "w-full");    
+    }
+    
 });
 
 menu.forEach(element => {
