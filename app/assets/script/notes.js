@@ -141,6 +141,7 @@ function getTemplateList(note, index) {
 };
 
 listOfNotes.onclick = function (event) {
+  let checkRow = document.querySelectorAll(".row_check_button");
   if (event.target.dataset.index) {
     const index = parseInt(event.target.dataset.index);
     const type = event.target.dataset.type;
@@ -151,10 +152,8 @@ listOfNotes.onclick = function (event) {
       notes.splice(index, 1);
     }else if (type === "toggle_row") {
         const chldIndex = event.target.parentNode.dataset.index
-          let checkRow = document.querySelectorAll(".row_check_button");
-          console.log(chldIndex);
           notes[index].rowCheked.push(chldIndex);
-          checkRow[chldIndex].classList.replace('filter_blue', 'filter_green')
+          checkRow[chldIndex].classList.replace("filter_blue", "filter_green")
         }
   }
   updateListOfNotes();
