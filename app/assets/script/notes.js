@@ -150,7 +150,7 @@ listOfNotes.onclick = function (event) {
       notes[index].checked = !notes[index].checked;
     } else if (type === "remove") {
       notes.splice(index, 1);
-    }else if (type === "toggle_row") {
+    } else if (type === "toggle_row") {
         const chldIndex = event.target.parentNode.dataset.index
           notes[index].rowCheked.push(chldIndex);
           checkRow[chldIndex].classList.replace("filter_blue", "filter_green")

@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <script src="assets/script/menu.js" defer></script>
-    <script src="assets/script/notes.js" defer></script>
+    <!-- <script src="assets/script/notes.js" defer></script> -->
     <script src="assets/script/theme.js" defer></script>
     <script src="assets/script/actions.js" defer></script>
+    <script src="assets/script/index.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="shortcut icon"
@@ -17,7 +18,7 @@
     <title>NoteS</title>
   </head>
   <body
-    class="grid grid-cols-[0.20fr_1fr] grid-rows-[0.05fr_1fr_0.06fr] bg-slate-900 h-screen"
+    class="grid grid-cols-1 grid-rows-[0.05fr_1fr] bg-slate-900 h-screen"
     id="body_container"
   >
     <header
@@ -105,8 +106,9 @@
         </ul>
       </div>
     </header>
+    <div class="grid grid-cols-[0.20fr_1fr] grid-rows-[1fr_0.05fr] " id="app">
     <aside
-      class="bg-slate-900 row-start-2 row-end-3 col-start-1 col-end-2 flex justify-between flex-col w-full"
+      class="bg-slate-900 row-start-1 row-end-2 col-start-1 col-end-2 flex justify-between flex-col w-full"
       id="menu_desktop"
     >
       <ul class="flex flex-col last:justify-end" id="menu">
@@ -116,8 +118,8 @@
           <img
             class="filter-white"
             src="assets/svg/add-outline.svg"
-            height="32px"
-            width="32px"
+            height="32"
+            width="32"
             alt="notes_icon"
             id="menu_icon"
           />
@@ -129,12 +131,13 @@
           class="menu_element md:p-5 sm:p-1 flex flex-nowrap items-center rounded-xl md:my-1 md:mx-4 sm:mx-1 cursor-pointer transition-colors"
           id="menu_element"
           data-type="menu_notes"
+          v-on:click="typeOfNotes = 'note'"
         >
           <img
             class="filter-white"
             src="assets/svg/document-outline.svg"
-            height="32px"
-            width="32px"
+            height="32"
+            width="32"
             alt="notes_icon"
             id="menu_icon"
           />
@@ -144,18 +147,20 @@
           class="menu_element md:p-5 sm:p-1 flex flex-nowrap items-center hover:bg-slate-800 rounded-xl md:mx-4 sm:mx-1 cursor-pointer transition-colors"
           id="menu_element"
           data-type="menu_lists"
+          v-on:click="typeOfNotes = 'list'"
         >
           <img
             class="filter-white"
             src="assets/svg/list-outline.svg"
-            height="32px"
-            width="32px"
+            height="32"
+            width="32"
             alt="lists_icon"
             id="menu_icon"
           />
           <p class="ml-5" id="menu_element_title">List</p>
         </li>
         <hr class="mx-20 mt-2 border-t-slate-500" />
+
       </ul>
       <div
         class="group menu_element flex flex-nowrap items-center rounded-xl bg-slate-700 hover:bg-slate-800 transition-colors md:m-4 sm:m-1 md:p-5 sm:p-1 cursor-pointer justify-between"
@@ -165,8 +170,8 @@
         <img
           class="filter-white"
           src="assets/svg/person-circle-outline.svg"
-          width="32px"
-          height="32px"
+          width="32"
+          height="32"
           alt="Userpic"
           id="menu_icon"
         />
@@ -183,7 +188,7 @@
       </div>
     </aside>
     <main
-      class="grid xl:grid-cols-4 xl:grid-rows-4 row-start-2 row-end-3 col-start-2 col-end-3 bg-white dark:bg-slate-700 rounded-l-3xl"
+      class="grid xl:grid-cols-4 xl:grid-rows-4 row-start-1 row-end-2 col-start-2 col-end-3 bg-white dark:bg-slate-700 rounded-l-3xl"
       id="list_notes"
     >
       <div
@@ -193,11 +198,16 @@
         <input
           class="note_title font-bold mb-2 p-1 rounded-md transition-colors"
           placeholder="Add new note"
+          v-model="noteTitle"
+          v-bind:class="[titleIsNull ? 'bg-red-400' : 'bg-slate-100']"
+          v-on:keypress.enter="addNote"
         />
         <textarea
-          class="note_text resize-none bg-slate-300 rounded-md h-full transition-colors"
+          class="note_text resize-none rounded-md h-full transition-colors"
           type="text"
           placeholder="Type here"
+          v-model="noteText"
+          v-bind:class="[textIsNull ? 'bg-red-400' : 'bg-slate-300']"
         ></textarea>
         <div
           class="collapse group-hover:visible flex flex-nowrap justify-end pt-1"
@@ -206,68 +216,98 @@
           <button
             class="filter-blue bg-[url('assets/svg/add-circle.svg')] w-5 h-5"
             id="add_button"
+            v-on:click="addNote"
+          ></button>
+        </div>
+      </div>
+      <div
+        class="group text-black p-2 m-2 rounded-xl flex flex-col"
+        v-for="(note, index) in notes"
+        :key="note.id"
+        v-bind:class="[notes[index].checked ? 'bg-slate-500' : 'bg-slate-300']"
+      >
+        <p class="note_title font-bold mb-2 p-1">{{note.title}}</p>
+        <textarea
+          class="note_text resize-none rounded-md h-full"
+          type="text"
+          placeholder="Type here"
+          disabled
+          v-bind:class="[notes[index].checked ? 'bg-slate-500' : 'bg-slate-300']"
+        >
+{{note.text}}</textarea
+        >
+        <div
+          class="invisible group-hover:visible flex flex-nowrap justify-end pt-1"
+          id="buttons"
+        >
+          <button
+            class="check_button filter-green bg-[url('assets/svg/checkmark-circle.svg')] w-5 h-5"
+            v-on:click="changeNote(index, 'toggle')"
+          ></button>
+          <button
+            class="remove_button filter-red bg-[url('assets/svg/close-circle.svg')] w-5 h-5"
+            v-on:click="changeNote(index, 'remove')"
           ></button>
         </div>
       </div>
     </main>
     <footer
-      class="row-start-3 row-end-4 col-start-2 col-end-3 my-auto flex justify-between"
-      id="footer"
+    class="row-start-2 row-end-3 col-start-2 col-end-3 my-auto flex justify-between"
+    id="footer"
     >
-      <div class="flex flex-nowrap items-center">
+             <div class="flex flex-nowrap items-center" id="filters_desktop">
         <img
           class="filter-white"
-          height="18px"
-          width="18px"
+          height="18"
+          width="18"
           src="assets/svg/swap-vertical-outline.svg"
-          alt="theme_icon"
+          alt="sort_icon"
         />
         <select
-          class="text-black rounded-md bg-slate-200 ml-5"
-          name="sort"
-          id="sort_sel"
+        class="text-black rounded-md bg-slate-200 ml-5"
+        name="sort"
+        id="sort_sel"
+        v-model="selectedSort"
+        @change="sortList"
         >
-          <option value="date">Date</option>
-          <option value="completed">Completed</option>
-          <option value="active">Active</option>
+          <option v-for="sort in sortOptions" :value="sort">{{sort}}</option>
         </select>
         <img
           class="filter-white ml-5"
-          height="20px"
-          width="20px"
+          height="20"
+          width="20"
           src="assets/svg/options-outline.svg"
-          alt="theme_icon"
+          alt="filter_icon"
         />
         <select
           class="text-black rounded-md bg-slate-200 ml-5"
-          name="filter"
           id="filter_sel"
+          v-model="selectedFilter"
+          @change="filterList"
         >
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="active">Active</option>
+          <option v-for="filter in filterOptions" :value="filter">{{filter}}</option>
         </select>
         <img
           class="filter-white ml-5"
-          height="20px"
-          width="20px"
+          height="20"
+          width="20"
           src="assets/svg/layers-outline.svg"
-          alt="theme_icon"
+          alt="type_icon"
         />
         <select
           class="text-black rounded-md bg-slate-200 ml-5"
           name="type"
           id="type_sel"
-        >
-          <option value="all">All</option>
-          <option value="note">Notes</option>
-          <option value="list">Lists</option>
+          v-model="selectedType"
+          @change="typeList"
+        ><option v-for="types in typeOptions" :value="types">{{types}}</option>
         </select>
-      </div>
-      <div class="copyrights md:flex sm:hidden justify-end pr-5">
-        VIP Disigned by Skino 2023
-      </div>
-    </footer>
+      </div>     
+    <div class="copyrights md:flex sm:hidden justify-end pr-5">
+      VIP Disigned by Skino 2023
+    </div>
+  </footer>
+</div>
     <div
       class="hidden w-screen bg-slate-900 fixed bottom-0 justify-between"
       id="menu_mobile"
@@ -432,5 +472,6 @@
         </div>
       </div>
     </div>
+    <script src="https://unpkg.com/vue@next"></script>
   </body>
 </html>

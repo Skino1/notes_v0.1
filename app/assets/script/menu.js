@@ -1,4 +1,4 @@
-const body = document.querySelector("#body_container");
+const appBody = document.querySelector("#app");
 
 const menuBtn = document.querySelector("#menu_button");
 const menuElements = Array.from(document.querySelectorAll(".menu_element"));
@@ -18,17 +18,17 @@ const noteElement = menuElements.filter(
 const listElement = menuElements.filter(
   (element) => element.dataset.type === "menu_lists"
 );
-let typeOfNotes = 'note';
+
 
 noteElement.forEach(element => {
   element.classList.add("bg-slate-700");
 });
 
 menuBtn.addEventListener("click", function () {
-  if (body.classList.contains("grid-cols-[0.20fr_1fr]")) {
-    body.classList.replace("grid-cols-[0.20fr_1fr]", "grid-cols-[0.05fr_1fr]");
+  if (appBody.classList.contains("grid-cols-[0.20fr_1fr]")) {
+    appBody.classList.replace("grid-cols-[0.20fr_1fr]", "grid-cols-[0.05fr_1fr]");
   } else {
-    body.classList.replace("grid-cols-[0.05fr_1fr]","grid-cols-[0.20fr_1fr]"); 
+    appBody.classList.replace("grid-cols-[0.05fr_1fr]","grid-cols-[0.20fr_1fr]"); 
   }
   for (let i = 0; i < menuElTitle.length; i++) {
     const element = menuElTitle[i];

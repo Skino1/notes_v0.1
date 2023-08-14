@@ -51,10 +51,10 @@ body {
     display: none;
   }
 
-  #body_container {
+  #app {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.05fr 1fr;
+    grid-template-rows:  1fr;
   }
 
   #list_notes {
