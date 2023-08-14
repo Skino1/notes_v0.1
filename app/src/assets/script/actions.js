@@ -1,4 +1,4 @@
-class Modal {
+export default class Modal {
   constructor() {
     this.modal = document.querySelector("#modal_background");
     this.modalWindow = document.querySelector("#modal_window");
@@ -51,5 +51,3 @@ class Modal {
     this.activeIndex = null;
   }
 }
-
-new Modal();

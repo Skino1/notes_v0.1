@@ -1,5 +1,9 @@
-body {
-  color: aliceblue;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  grid-template-rows: 0.05fr 1fr 0.05fr;
 }
 
 .filter-white {
@@ -35,7 +39,6 @@ body {
     grid-template-rows: repeat(3, minmax(0, 1fr));
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
 }
 
 @media (min-height: 500px) and (orientation: portrait) {
@@ -54,7 +57,6 @@ body {
   #app {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows:  1fr;
   }
 
   #list_notes {
@@ -103,7 +105,7 @@ body {
   .copyrights {
     display: none;
   }
-    .mobile_profile {
+  .mobile_profile {
     display: none;
   }
 }
@@ -123,7 +125,7 @@ body {
   .copyrights {
     display: none;
   }
-   .mobile_profile {
+  .mobile_profile {
     display: none;
   }
 }
@@ -137,7 +139,7 @@ body {
   #filters_menu_mobile {
     display: none;
   }
-     .mobile_profile {
+  .mobile_profile {
     display: none;
   }
 }
