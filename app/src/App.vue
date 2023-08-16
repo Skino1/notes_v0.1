@@ -35,7 +35,7 @@
     class="grid xl:grid-cols-4 xl:grid-rows-4 row-start-2 row-end-3 col-start-2 col-end-3 bg-white dark:bg-slate-700 rounded-l-3xl"
     id="list_notes">
     <CreateNote @NoteAdded="addNote"></CreateNote>
-    <NotesElement :notes="ArrayNotes" @noteDeleted="deleteNote" @noteChecked="checkNote"></NotesElement>
+    <NotesElement :notes="ArrayNotes" @noteDeleted="deleteNote" @noteChecked="checkNote" @noteRow="toggleRow"></NotesElement>
   </main>
   <footer class="text-white dark:text-white flex justify-between row-start-3 row-end-4 col-start-2 col-end-3 items-center"
     id="footer">
@@ -86,7 +86,7 @@ export default {
       selectedType: "All",
       sortOptions: ["Date", "Active", "Completed"],
       filterOptions: ["All", "Active", "Completed"],
-      typeOptions: ["All", "Notes", "Lists"],
+      typeOptions: ["All", "Notes", "Lists", 'Images'],
     };
   },
   components: {
@@ -108,6 +108,10 @@ export default {
 
     checkNote(index) {
       this.notes[index].checked = !this.notes[index].checked
+    },
+
+    toggleRow(index) {
+      this.notes[index]
     },
     sortList() {
       if (this.selectedSort === "Active") {
@@ -132,9 +136,14 @@ export default {
       this.ArrayNotes = this.notes;
       if (this.selectedType === "Notes") {
         this.ArrayNotes = this.ArrayNotes.filter(note => note.type == 'note');
-      } else if (this.selectedType === "Lists") {
+      } 
+      if (this.selectedType === "Lists") {
         this.ArrayNotes = this.ArrayNotes.filter(note => note.type == 'list');
-      } else if (this.selectedType === "All") {
+      } 
+      if (this.selectedType === "Images") {
+        this.ArrayNotes = this.ArrayNotes.filter(note => note.type == 'image');
+      } 
+      if (this.selectedType === "All") {
         this.ArrayNotes = this.notes;
       }
     },

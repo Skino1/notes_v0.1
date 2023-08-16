@@ -4,26 +4,34 @@
     <ul class="flex flex-col last:justify-end" id="menu">
       <li class="md:my-3 flex flex-nowrap items-center justify-center cursor-pointer">
         <img class="filter-white" src="../assets/svg/add-outline.svg" height="32" width="32" alt="notes_icon"
-          id="menu_icon" />
+           />
         <p class="create_new text-center" id="menu_element_title" v-bind:class="[this.$store.state.menuHidden == true ? 'hidden' : '']">
           Create new
         </p>
       </li>
       <li
         class="menu_element sm:p-1 flex flex-nowrap items-center rounded-xl md:my-1 md:mx-4 sm:mx-1 cursor-pointer transition-colors"
-        id="menu_element" data-type="menu_notes" v-on:click="makeActive('note')"
+         data-type="menu_notes" v-on:click="makeActive('note')"
         v-bind:class="[activeElement == 'note' ? 'bg-slate-700' : 'hover:bg-slate-800', this.$store.state.menuHidden == true ? 'md:p-3' : 'md:p-5']" >
         <img class="filter-white" src="../assets/svg/document-outline.svg" height="32" width="32" alt="notes_icon"
-          id="menu_icon" />
+          />
         <p class="ml-5" id="menu_element_title" v-bind:class="[this.$store.state.menuHidden == true ? 'hidden' : '']" >Note</p>
       </li>
       <li
-        class="menu_element sm:p-1 flex flex-nowrap items-center  rounded-xl md:mx-4 sm:mx-1 cursor-pointer transition-colors"
-        id="menu_element" data-type="menu_lists" v-on:click="makeActive('list')"
+        class="menu_element sm:p-1 flex flex-nowrap items-center  rounded-xl md:my-1 md:mx-4 sm:mx-1 cursor-pointer transition-colors"
+         data-type="menu_lists" v-on:click="makeActive('list')"
         v-bind:class="[activeElement == 'list' ? 'bg-slate-700' : 'hover:bg-slate-800', this.$store.state.menuHidden == true ? 'md:p-3' : 'md:p-5']">
         <img class="filter-white" src="../assets/svg/list-outline.svg" height="32" width="32" alt="lists_icon"
-          id="menu_icon" />
+           />
         <p class="ml-5" id="menu_element_title" v-bind:class="[this.$store.state.menuHidden == true ? 'hidden' : '']">List</p>
+      </li>
+      <li
+        class="menu_element sm:p-1 flex flex-nowrap items-center  rounded-xl md:my-1 md:mx-4 sm:mx-1 cursor-pointer transition-colors"
+         data-type="menu_lists" v-on:click="makeActive('image')"
+        v-bind:class="[activeElement == 'image' ? 'bg-slate-700' : 'hover:bg-slate-800', this.$store.state.menuHidden == true ? 'md:p-3' : 'md:p-5']">
+        <img class="filter-white" src="../assets/svg/image-outline.svg" height="32" width="32" alt="lists_icon"
+           />
+        <p class="ml-5" id="menu_element_title" v-bind:class="[this.$store.state.menuHidden == true ? 'hidden' : '']">Image</p>
       </li>
       <hr class="mx-20 mt-2 border-t-slate-500" />
     </ul>
@@ -36,16 +44,16 @@
   </aside>
   <div class="hidden w-screen bg-slate-900 fixed bottom-0 justify-between" id="menu_mobile">
     <ul class="flex flex-row justify-between" id="menu">
-      <li class="menu_element p-3 m-1 flex items-center rounded-xl cursor-pointer transition-colors" id="menu_element"
+      <li class="menu_element p-3 m-1 flex items-center rounded-xl cursor-pointer transition-colors" 
         v-on:click="makeActive('note')" v-bind:class="[activeElement == 'note' ? 'bg-slate-700' : 'hover:bg-slate-800']">
         <img class="filter-white" src="../assets/svg/document-outline.svg" height="32" width="32" alt="notes_icon"
-          id="menu_icon" />
+          />
       </li>
       <li class="menu_element p-3 m-1 flex items-center rounded-xl cursor-pointer transition-colors"
         id="menu_element" v-on:click="makeActive('list')"
         v-bind:class="[activeElement == 'list' ? 'bg-slate-700' : 'hover:bg-slate-800']">
         <img class="filter-white" src="../assets/svg/list-outline.svg" height="32" width="32" alt="lists_icon"
-          id="menu_icon" />
+           />
       </li>
     </ul>
     <div class="m-1 rounded-xl cursor-pointer transition-colors p-3 " id="filters_mobile" v-on:click="showFilters()" v-bind:class="[mobileFilters == true ? 'bg-slate-700' : '']" >
