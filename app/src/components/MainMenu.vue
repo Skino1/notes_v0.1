@@ -55,35 +55,25 @@
         <img class="filter-white" src="../assets/svg/list-outline.svg" height="32" width="32" alt="lists_icon"
            />
       </li>
+      <li class="menu_element p-3 m-1 flex items-center rounded-xl cursor-pointer transition-colors"
+        id="menu_element" v-on:click="makeActive('image')"
+        v-bind:class="[activeElement == 'image' ? 'bg-slate-700' : 'hover:bg-slate-800']">
+        <img class="filter-white" src="../assets/svg/image-outline.svg" height="32" width="32" alt="lists_icon"
+           />
+      </li>
     </ul>
     <div class="m-1 rounded-xl cursor-pointer transition-colors p-3 " id="filters_mobile" v-on:click="showFilters()" v-bind:class="[mobileFilters == true ? 'bg-slate-700' : '']" >
       <img class="filter-white" height="28" width="32" src="../assets/svg/funnel-outline.svg" alt="filter_icon" />
     </div>
   </div>
-  <div class="w-screen bg-slate-900 fixed bottom-16 flex-row items-center justify-between p-4" v-bind:class="[mobileFilters == true ? 'flex' : 'hidden']"
+  <div class="flex w-screen bg-slate-900 fixed bottom-16 justify-center p-4" v-bind:class="[mobileFilters == true ? 'flex' : 'hidden']"
     id="filters_menu_mobile">
-    <img class="filter-white" height="18px" width="18px" src="../assets/svg/swap-vertical-outline.svg" alt="theme_icon" />
-    <select class="text-black rounded-md bg-slate-200 h-full" name="sort" id="sort_sel">
-      <option value="date">Date</option>
-      <option value="completed">Completed</option>
-      <option value="active">Active</option>
-    </select>
-    <img class="filter-white" height="20px" width="20px" src="../assets/svg/options-outline.svg" alt="theme_icon" />
-    <select class="text-black rounded-md bg-slate-200" name="filter" id="filter_sel">
-      <option value="add">All</option>
-      <option value="completed">Completed</option>
-      <option value="active">Active</option>
-    </select>
-    <img class="filter-white" height="20px" width="20px" src="../assets/svg/layers-outline.svg" alt="theme_icon" />
-    <select class="text-black rounded-md bg-slate-200" name="type" id="type_sel">
-      <option value="add">All</option>
-      <option value="note">Notes</option>
-      <option value="list">Lists</option>
-    </select>
+    <FilterMenu></FilterMenu>
   </div>
 </template>
 
 <script>
+import FilterMenu from './FilterMenu.vue'
 export default {
   emits: ['selectedNoteType'],
   data() {
@@ -91,6 +81,9 @@ export default {
       activeElement: 'note',
       mobileFilters: false
     }
+  },
+  components: {
+    FilterMenu
   },
 
   methods: {

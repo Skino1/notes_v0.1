@@ -4,18 +4,70 @@ const store = createStore({
   state: {
     typeOfNotes: "note",
     notes: [],
-    menuHidden: false
+    ArrayNotes: [],
+    menuHidden: false,
+  },
+  actions: {
+    addNote({ commit }, note) {
+      commit("ADD_NOTE", note);
+    },
   },
   mutations: {
-    setTypeNotes (state, value) {
-      state.typeOfNotes = value
+    ADD_NOTE(state, note) {
+      state.notes.push(note);
+    },
+    setTypeNotes(state, value) {
+      state.typeOfNotes = value;
     },
     toggleMenu(state) {
-      state.menuHidden = !state.menuHidden
+      state.menuHidden = !state.menuHidden;
     },
-    setNotes(state, value) {
-      state.notes = state.notes.push(value)
-    }
-  }
+    setArrayOfNotes(state, value) {
+      state.ArrayNotes = value;
+    },
+    filterList(state, value) {
+      state.ArrayNotes = state.notes;
+      if (value === "Active") {
+        state.ArrayNotes = state.ArrayNotes.filter(
+          (note) => note.checked == false
+        );
+      } else if (value === "Completed") {
+        state.ArrayNotes = state.ArrayNotes.filter(
+          (note) => note.checked == true
+        );
+      } else if (value === "All") {
+        state.ArrayNotes = state.notes;
+      }
+    },
+    typeList(state, value) {
+      state.ArrayNotes = state.notes;
+      if (value === "Notes") {
+        state.ArrayNotes = state.ArrayNotes.filter(
+          (note) => note.type == "note"
+        );
+      }
+      if (value === "Lists") {
+        state.ArrayNotes = state.ArrayNotes.filter(
+          (note) => note.type == "list"
+        );
+      }
+      if (value === "Images") {
+        state.ArrayNotes = state.ArrayNotes.filter(
+          (note) => note.type == "image"
+        );
+      }
+      if (value === "All") {
+        state.ArrayNotes = state.notes;
+      }
+    },
+  },
+  getters: {
+    notes(state) {
+      return state.notes;
+    },
+    ArrayNotes(state) {
+      return state.ArrayNotes;
+    },
+  },
 });
 export default store;

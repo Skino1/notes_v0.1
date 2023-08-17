@@ -1,10 +1,10 @@
 <template>
-    <div id="add_note"
+    <div id="add_image"
         class="group hover:bg-slate-500 transition-colors text-black p-2 m-2 bg-slate-300 rounded-xl flex flex-col">
-        <input class="note_title font-bold mb-2 p-1 rounded-md transition-colors" placeholder="Add new note"
+        <input class="note_title font-bold mb-2 p-1 rounded-md transition-colors" placeholder="Add new image"
             v-model="noteTitle" v-bind:class="[titleIsNull ? 'bg-red-400' : 'bg-slate-100']"
             v-on:keypress.enter="addNote" />
-        <textarea class="note_text resize-none rounded-md h-full transition-colors" type="text" placeholder="Type here"
+        <textarea class="note_text resize-none rounded-md h-full transition-colors" type="text" placeholder="Insert URL image"
             v-model="noteText" v-bind:class="[textIsNull ? 'bg-red-400' : 'bg-slate-300']"></textarea>
         <div class="collapse group-hover:visible flex flex-nowrap justify-end pt-1" id="buttons">
             <button class="filter-blue bg-[url('./assets/svg/add-circle.svg')] w-5 h-5" id="add_button"
