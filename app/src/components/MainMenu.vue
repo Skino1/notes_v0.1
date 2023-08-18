@@ -66,7 +66,7 @@
       <img class="filter-white" height="28" width="32" src="../assets/svg/funnel-outline.svg" alt="filter_icon" />
     </div>
   </div>
-  <div class="flex w-screen bg-slate-900 fixed bottom-16 justify-center p-4" v-bind:class="[mobileFilters == true ? 'flex' : 'hidden']"
+  <div class="flex w-screen bg-slate-900 fixed bottom-16 h-16 justify-center" v-bind:class="[mobileFilters == true ? 'flex' : 'hidden']"
     id="filters_menu_mobile">
     <FilterMenu></FilterMenu>
   </div>
