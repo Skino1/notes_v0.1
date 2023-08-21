@@ -4,8 +4,9 @@
         <input class="note_title font-bold mb-2 p-1 rounded-md transition-colors" placeholder="Add new list"
             v-model="noteTitle" v-bind:class="[titleIsNull ? 'bg-red-400' : 'bg-slate-100']"
             v-on:keypress.enter="addNote" />
-        <textarea class="note_text resize-none rounded-md h-full transition-colors" type="text" placeholder="Type here. To new row press ENTER"
-            v-model="noteText" v-bind:class="[textIsNull ? 'bg-red-400' : 'bg-slate-300']"></textarea>
+        <textarea class="note_text resize-none rounded-md h-full transition-colors" type="text"
+            placeholder="Type here. To new row press ENTER" v-model="noteText"
+            v-bind:class="[textIsNull ? 'bg-red-400' : 'bg-slate-300']"></textarea>
         <div class="collapse group-hover:visible flex flex-nowrap justify-end pt-1" id="buttons">
             <button class="filter-blue bg-[url('./assets/svg/add-circle.svg')] w-5 h-5" id="add_button"
                 v-on:click="addNote"></button>
@@ -15,7 +16,6 @@
 
 <script>
 export default {
-    emits: ["noteAdded"],
     data() {
         return {
             noteTitle: "",
@@ -26,6 +26,8 @@ export default {
     },
     methods: {
         addNote() {
+            var autoincrement = require('autoincrement');
+            autoincrement == (autoincrement + 1);
             const typeOfNotes = this.$store.state.typeOfNotes
             if (this.noteTitle == "") {
                 this.titleIsNull = true;
@@ -50,15 +52,26 @@ export default {
             const newNote = {
                 id: Math.floor(Math.random() * 1000),
                 title: this.noteTitle,
-                linesOfList: this.noteText.split("\n"),
-                linesCheked: [],
+                lines: [],
                 checked: false,
                 createdAt: new Date(),
                 type: typeOfNotes,
             };
-            this.$emit('noteAdded', newNote);
+            const lines = this.noteText.split("\n")
+            for (let row = 0; row < lines.length; row++) {
+                let rowId = +autoincrement
+                const element = lines[row];
+                newNote.lines.push({ idRow: rowId, rowText: element, checkedRow: false })
+            }
+            this.$store.dispatch('addNote', newNote)
+            this.$store.commit('setArrayOfNotes', this.notes)
             this.noteTitle = "";
             this.noteText = "";
+        },
+    },
+    computed: {
+        notes() {
+            return this.$store.state.notes
         },
     }
 }

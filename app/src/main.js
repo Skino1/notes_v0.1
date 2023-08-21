@@ -11,3 +11,15 @@ app.mount('#app')
 
 new Modal();
 
+async function getNotes () {
+      try {
+        let elements = this.$store.state.notes;
+        const resp = await fetch('http://localhost:3001/notes')
+        elements = await resp.json();
+        console.log(elements);
+      } catch (error) {
+        console.error();
+      }
+    }
+
+getNotes()

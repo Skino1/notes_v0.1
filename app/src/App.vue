@@ -4,9 +4,9 @@
   <main
     class="grid xl:grid-cols-4 xl:grid-rows-4 row-start-2 row-end-3 col-start-2 col-end-3 bg-white dark:bg-slate-700 rounded-l-3xl"
     id="list_notes">
-    <CreateNote @NoteAdded="addNote" v-if="typeOfNotes == 'note'"></CreateNote>
-    <CreateList @NoteAdded="addNote" v-if="typeOfNotes == 'list'"></CreateList>
-    <CreateImage @NoteAdded="addNote" v-if="typeOfNotes == 'image'"></CreateImage>
+    <CreateNote  v-if="typeOfNotes == 'note'"></CreateNote>
+    <CreateList  v-if="typeOfNotes == 'list'"></CreateList>
+    <CreateImage v-if="typeOfNotes == 'image'"></CreateImage>
     <NotesElement></NotesElement>
   </main>
   <footer class="text-white dark:text-white flex justify-between row-start-3 row-end-4 col-start-2 col-end-3 items-center"
@@ -43,21 +43,9 @@ export default {
     HeaderMenu,
     CreateImage,
   },
-  methods: {
 
-    addNote(newNote) {
-      this.$store.dispatch('addNote', newNote)
-      this.$store.commit('setArrayOfNotes', this.notes)
-    },
-  },
   computed: {
     ...mapState(['typeOfNotes']),
-    notes() {
-      return this.$store.state.notes
-    },
-    ArrayNotes() {
-      return this.$store.state.ArrayNotes
-    }
   }
 
 }

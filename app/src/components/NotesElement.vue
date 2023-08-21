@@ -5,10 +5,12 @@
     <p class="note_title font-bold mb-2 p-1">{{ note.title }}</p>
     <ul class="note_text rounded-md h-full">
       <li class="note_text rounded-md h-full" v-if="note.type == 'note'">{{ note.text }}</li>
-      <li class="flex items-center" v-if="note.type == 'list'" v-for="(line, rowindex) in note.linesOfList" :key="rowindex">
+      <li class="flex items-center" v-if="note.type == 'list'" v-for="(line, rowindex) in note.lines" :key="rowindex">
         <button
           class="row_check_button bg-[url('./assets/svg/chevron-forward-circle-outline.svg')] w-5 h-5 hover:bg-[url('./assets/svg/checkmark-circle.svg')]"
-          v-on:click="toggleRowList(index, rowindex)" v-bind:class="[note.linesCheked.includes(rowindex) ? 'filter-green' : 'filter-blue']"></button>{{ line }}</li>
+          v-on:click="toggleRowList(index, rowindex)"
+          v-bind:class="[line.checkedRow ? 'filter-green' : 'filter-blue']"></button>{{ line.rowText }}
+      </li>
       <li class="note_text rounded-md h-full" v-if="note.type == 'image'"><img v-bind:src="note.text" alt="123"></li>
 
     </ul>
@@ -25,19 +27,9 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-  data() {
-    return {
-      lines: [],
-    }
-  },
-
   methods: {
-    toList(note) {
-      return note.text.split("\n")
-    },
     changeNote(index, type) {
       if (type === "toggle") {
-
         this.notes[index].checked = !this.notes[index].checked
       } else if (type === "remove") {
         this.notes.splice(index, 1);
@@ -45,13 +37,16 @@ export default {
       }
     },
     toggleRowList(noteIndex, rowIndex) {
-      if (!this.notes[noteIndex].linesCheked.includes(rowIndex)) {
-        this.notes[noteIndex].linesCheked.push(rowIndex)
-        } else {
-          console.log(noteIndex,rowIndex);
-          const removeIndex = this.notes[noteIndex].linesCheked.field == rowIndex
-          this.notes[noteIndex].linesCheked.splice(removeIndex, 1)
-        }
+      if (this.notes[noteIndex].lines[rowIndex].checkedRow == false) {
+        this.notes[noteIndex].lines[rowIndex].checkedRow = true
+      } else {
+        this.notes[noteIndex].lines[rowIndex].checkedRow = false
+      }
+    },
+    checkedNoteIfRowsChecked() {
+      if (this.notes.lines.every(line=>line.checkedRow)) {
+        this.notes[index].checked = true
+      }
     }
   },
   computed: {

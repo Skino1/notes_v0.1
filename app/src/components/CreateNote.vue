@@ -15,7 +15,6 @@
 
 <script>
 export default {
-    emits: ["noteAdded"],
     data() {
         return {
             noteTitle: "",
@@ -55,9 +54,15 @@ export default {
                 createdAt: new Date(),
                 type: typeOfNotes,
             };
-            this.$emit('noteAdded', newNote);
+            this.$store.dispatch('addNote', newNote)
+            this.$store.commit('setArrayOfNotes', this.notes)
             this.noteTitle = "";
             this.noteText = "";
+        },
+    },
+    computed: {
+            notes() {
+            return this.$store.state.notes
         },
     }
 }
