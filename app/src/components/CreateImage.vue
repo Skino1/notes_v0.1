@@ -15,7 +15,6 @@
 
 <script>
 export default {
-    emits: ["noteAdded"],
     data() {
         return {
             noteTitle: "",
@@ -48,16 +47,20 @@ export default {
                 return;
             }
             const newNote = {
-                id: Math.floor(Math.random() * 1000),
                 title: this.noteTitle,
                 text: this.noteText,
                 checked: false,
                 createdAt: new Date(),
                 type: typeOfNotes,
             };
-            this.$emit('noteAdded', newNote);
+            this.$store.dispatch('addNote', newNote)
             this.noteTitle = "";
             this.noteText = "";
+        },
+    },
+        computed: {
+        notes() {
+            return this.$store.state.notes
         },
     }
 }

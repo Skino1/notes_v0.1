@@ -50,7 +50,6 @@ export default {
                 return;
             }
             const newNote = {
-                id: Math.floor(Math.random() * 1000),
                 title: this.noteTitle,
                 lines: [],
                 checked: false,
@@ -64,7 +63,6 @@ export default {
                 newNote.lines.push({ idRow: rowId, rowText: element, checkedRow: false })
             }
             this.$store.dispatch('addNote', newNote)
-            this.$store.commit('setArrayOfNotes', this.notes)
             this.noteTitle = "";
             this.noteText = "";
         },

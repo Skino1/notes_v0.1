@@ -47,23 +47,25 @@ export default {
                 return;
             }
             const newNote = {
-                id: Math.floor(Math.random() * 1000),
                 title: this.noteTitle,
                 text: this.noteText,
                 checked: false,
                 createdAt: new Date(),
                 type: typeOfNotes,
+                author: this.author
             };
             this.$store.dispatch('addNote', newNote)
-            this.$store.commit('setArrayOfNotes', this.notes)
             this.noteTitle = "";
             this.noteText = "";
         },
     },
     computed: {
-            notes() {
-            return this.$store.state.notes
+        notes() {
+            return this.$store.getters.notes
         },
+        author() {
+            return this.$store.getters.author
+        }
     }
 }
 </script>
